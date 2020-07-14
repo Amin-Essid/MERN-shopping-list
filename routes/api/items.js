@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const itemsControllers = require('../../controllers/itemsControllers');
+const auth = require('../../middleware/auth')
 
 
 // @route GET api/items
@@ -10,12 +11,12 @@ router.get('/', itemsControllers.items_get);
 
 // @route POST api/items
 // @desc create aan item
-// @access public 
-router.post('/', itemsControllers.item_post);
+// @access private
+router.post('/', auth, itemsControllers.item_post);
 
 // @route DELETE api/items
 // @desc create an item
-// @access public 
-router.delete('/:id', itemsControllers.item_delete);
+// @access private
+router.delete('/:id', auth, itemsControllers.item_delete);
 
 module.exports = router;
